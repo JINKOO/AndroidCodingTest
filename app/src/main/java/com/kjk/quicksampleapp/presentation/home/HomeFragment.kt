@@ -53,6 +53,8 @@ class HomeFragment : Fragment() {
     private fun observe() {
         viewModel.bookList.observe(viewLifecycleOwner, Observer {
             Log.d(TAG, "observe: ")
+            val temp = viewModel.bookList.value!!.get(0)
+            Log.d(TAG, "observe: ${temp}")
         })
     }
 

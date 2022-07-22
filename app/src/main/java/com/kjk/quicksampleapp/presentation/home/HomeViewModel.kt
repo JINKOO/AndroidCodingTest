@@ -18,16 +18,25 @@ class HomeViewModel : ViewModel() {
     val bookList: LiveData<List<BookEntity>>
         get() = _bookList
 
+
+    private val _apiStatus = MutableLiveData<ApiStatus>()
+    val apiStatus: LiveData<ApiStatus>
+        get() = _apiStatus
+
     init {
-        Log.d(TAG, ": ")
+        Log.d(TAG, "init{}")
         loadAllBooks()
     }
 
+
     private fun loadAllBooks() {
         viewModelScope.launch {
+            _apiStatus.value = ApiStatus.LOADING
             try {
                 _bookList.value = repository.getBookListFromRemote()
+                _apiStatus.value = ApiStatus.DONE
             } catch (e: Exception) {
+                _apiStatus.value = ApiStatus.ERROR
                 Log.d(TAG, "loadAllBooks: ${e.message}")
             }
         }
@@ -36,4 +45,10 @@ class HomeViewModel : ViewModel() {
     companion object {
         private const val TAG = "HomeViewModel"
     }
+}
+
+enum class ApiStatus {
+    LOADING,
+    DONE,
+    ERROR
 }

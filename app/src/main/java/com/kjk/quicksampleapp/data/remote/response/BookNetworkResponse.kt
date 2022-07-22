@@ -3,11 +3,12 @@ package com.kjk.quicksampleapp.data.remote.response
 import com.google.gson.annotations.SerializedName
 
 data class BookNetworkResponse(
-    val resultCode: Int,
-    val resultMsg: String,
-    val numOfRows: Int,
-    val pageNo: Int,
-    val totalCount: Int,
+//    val resultCode: Int,
+//    val resultMsg: String,
+//    val numOfRows: Int,
+//    val pageNo: Int,
+//    val totalCount: Int,
+    @SerializedName("items")
     val items: List<BookResponse>
 )
 

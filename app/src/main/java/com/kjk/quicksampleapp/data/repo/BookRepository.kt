@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class BookRepository {
 
-    private lateinit var bookList: List<BookEntity>
+    private var bookList: List<BookEntity> = emptyList()
 
     suspend fun getBookListFromRemote(): List<BookEntity> {
         withContext(Dispatchers.IO) {
