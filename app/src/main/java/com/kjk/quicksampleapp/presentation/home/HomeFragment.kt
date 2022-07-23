@@ -56,6 +56,10 @@ class HomeFragment : Fragment() {
             val temp = viewModel.bookList.value!!.get(0)
             Log.d(TAG, "observe: ${temp}")
         })
+        
+        viewModel.videoList.observe(viewLifecycleOwner, Observer {
+            Log.d(TAG, "observe: videos ${it.size}")
+        })
     }
 
 

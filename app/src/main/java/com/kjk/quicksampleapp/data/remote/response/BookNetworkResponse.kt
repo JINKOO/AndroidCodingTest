@@ -2,12 +2,25 @@ package com.kjk.quicksampleapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
+data class VideoNetworkResponse(
+    val videos: List<VideoInfo>
+)
+
+data class VideoInfo(
+    val title: String,
+    val description: String,
+    val url: String,
+    val updated: String,
+    val thumbnail: String,
+    val closedCaptions: String?
+)
+
 data class BookNetworkResponse(
-//    val resultCode: Int,
-//    val resultMsg: String,
-//    val numOfRows: Int,
-//    val pageNo: Int,
-//    val totalCount: Int,
+    val resultCode: Int,
+    val resultMsg: String,
+    val numOfRows: Int,
+    val pageNo: Int,
+    val totalCount: Int,
     @SerializedName("items")
     val items: List<BookResponse>
 )

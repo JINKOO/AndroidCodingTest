@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kjk.quicksampleapp.data.repo.BookRepository
 import com.kjk.quicksampleapp.domain.entity.BookEntity
+import com.kjk.quicksampleapp.domain.entity.VideoEntity
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -18,6 +19,10 @@ class HomeViewModel : ViewModel() {
     val bookList: LiveData<List<BookEntity>>
         get() = _bookList
 
+    private val _videoList = MutableLiveData<List<VideoEntity>>()
+    val videoList: LiveData<List<VideoEntity>>
+        get() = _videoList
+
 
     private val _apiStatus = MutableLiveData<ApiStatus>()
     val apiStatus: LiveData<ApiStatus>
@@ -26,6 +31,17 @@ class HomeViewModel : ViewModel() {
     init {
         Log.d(TAG, "init{}")
         loadAllBooks()
+        loadAllVideos()
+    }
+
+    private fun loadAllVideos() {
+        viewModelScope.launch {
+            try {
+                _videoList.value = repository.getVideoListFromRemote()
+            } catch(e: Exception) {
+                Log.d(TAG, "loadAllVideos: ${e.message}")
+            }
+        }
     }
 
 
