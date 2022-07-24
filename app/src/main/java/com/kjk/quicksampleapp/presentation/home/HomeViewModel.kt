@@ -5,73 +5,37 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kjk.quicksampleapp.data.repo.BookRepository
-import com.kjk.quicksampleapp.data.repo.VideoRepository
-import com.kjk.quicksampleapp.domain.entity.BookEntity
-import com.kjk.quicksampleapp.domain.entity.VideoEntity
+import com.kjk.quicksampleapp.data.repo.FlightScheduleRepository
+import com.kjk.quicksampleapp.domain.entity.ArrivalEntity
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class HomeViewModel : ViewModel() {
 
-    private val bookRepository = BookRepository()
-    private val videoRepository = VideoRepository()
+    private val repository = FlightScheduleRepository()
 
-    private val _bookList = MutableLiveData<List<BookEntity>>()
-    val bookList: LiveData<List<BookEntity>>
-        get() = _bookList
-
-
-    private val _videoList = MutableLiveData<List<VideoEntity>>()
-    val videoList: LiveData<List<VideoEntity>>
-        get() = _videoList
-
+    private val _flightArrivals = MutableLiveData<List<ArrivalEntity>>()
+    val flightArrivals: LiveData<List<ArrivalEntity>>
+        get() = _flightArrivals
 
     private val _apiStatus = MutableLiveData<ApiStatus>()
     val apiStatus: LiveData<ApiStatus>
         get() = _apiStatus
 
-
-    private val _navigateToDetail = MutableLiveData<BookEntity?>()
-    val navigateToDetail: LiveData<BookEntity?>
-        get() = _navigateToDetail
-
     init {
-        Log.d(TAG, "init{}")
-        loadAllBooks()
-        loadAllVideos()
+        loadAllArrivals()
     }
 
-    private fun loadAllVideos() {
-        viewModelScope.launch {
-            try {
-                _videoList.value = videoRepository.getVideoListFromRemote()
-            } catch(e: Exception) {
-                Log.d(TAG, "loadAllVideos: ${e.message}")
-            }
-        }
-    }
-
-
-    private fun loadAllBooks() {
+    private fun loadAllArrivals() {
         viewModelScope.launch {
             _apiStatus.value = ApiStatus.LOADING
             try {
-                _bookList.value = bookRepository.getBookListFromRemote()
                 _apiStatus.value = ApiStatus.DONE
+                _flightArrivals.value = repository.getArrivalsFromRemote()
             } catch (e: Exception) {
-                _apiStatus.value = ApiStatus.ERROR
-                Log.d(TAG, "loadAllBooks: ${e.message}")
+                _apiStatus.value = ApiStatus.DONE
+                Log.d(TAG, "loadAllArrivals: ${e.message}")
             }
         }
-    }
-
-    fun navigateToDetailFragment(bookEntity: BookEntity) {
-        _navigateToDetail.value = bookEntity
-    }
-
-    fun navigateToDetailDone() {
-        _navigateToDetail.value = null
     }
 
     companion object {
@@ -81,6 +45,6 @@ class HomeViewModel : ViewModel() {
 
 enum class ApiStatus {
     LOADING,
-    DONE,
-    ERROR
+    ERRIR,
+    DONE
 }

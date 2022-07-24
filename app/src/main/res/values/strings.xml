@@ -1,10 +1,4 @@
 <resources>
     <string name="app_name">QuickSampleApp</string>
-    <string name="book_info">도서 정보</string>
-    <string name="book_title">제 목</string>
-    <string name="book_author">저 자</string>
-    <string name="reference_library">열람 가능 도서관</string>
-    <string name="book_loanable">대출 가능 여부</string>
-    <string name="loanable_label">대여 가능</string>
-    <string name="not_loanable_label">대여 불가능</string>
+
 </resources>
