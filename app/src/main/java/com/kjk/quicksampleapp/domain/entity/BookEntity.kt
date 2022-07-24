@@ -1,17 +1,13 @@
 package com.kjk.quicksampleapp.domain.entity
 
-data class VideoEntity(
-    val title: String,
-    val description: String,
-    val url: String,
-    val updated: String,
-    val thumbnail: String,
-    val closedCaptions: String?
-)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class BookEntity(
     val number: Int,
     val title: String,
     val author: String,
-    val library: String
-)
+    val referenceLibrary: String,
+    val loanable: String?
+) : Parcelable

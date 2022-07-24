@@ -2,19 +2,6 @@ package com.kjk.quicksampleapp.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class VideoNetworkResponse(
-    val videos: List<VideoInfo>
-)
-
-data class VideoInfo(
-    val title: String,
-    val description: String,
-    val url: String,
-    val updated: String,
-    val thumbnail: String,
-    val closedCaptions: String?
-)
-
 data class BookNetworkResponse(
     val resultCode: Int,
     val resultMsg: String,
@@ -42,7 +29,7 @@ data class BookResponse(
     val library: String,
     @SerializedName("refrm")  // 도서관 내 도서를 가지고 있는 자료실
     val referenceRoom: String,
-    @SerializedName("loan_y") // 대출 가능 여부
+    @SerializedName("loan_yn") // 대출 가능 여부
     val loanableState: String,
     @SerializedName("rtn_ed") // 반납 예정일
     val expectedReturnDate: String,

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.kjk.quicksampleapp.presentation.detail.BookDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/book_info_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/book_info"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:textSize="18sp"
+            tools:text="SAMPLE TITLE"
+            android:text="@{viewModel.book.title}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title_label"
+            app:layout_constraintBottom_toBottomOf="@id/title_label"
+            app:layout_constraintTop_toTopOf="@id/title_label" />
+
+        <TextView
+            android:id="@+id/title_label"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/book_info_label"
+            android:text="@string/book_title"/>
+
+
+        <TextView
+            android:id="@+id/author_label"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_label"
+            android:text="@string/book_author"/>
+
+        <TextView
+            android:id="@+id/author_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@{viewModel.book.author}"
+            android:textSize="18sp"
+            tools:text="SAMPLE AUTHOR"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/author_label"
+            app:layout_constraintBottom_toBottomOf="@id/author_label"
+            app:layout_constraintTop_toTopOf="@id/author_label" />
+
+        <TextView
+            android:id="@+id/reference_label"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/author_label"
+            android:text="@string/reference_library"/>
+
+        <TextView
+            android:id="@+id/reference_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@{viewModel.book.referenceLibrary}"
+            android:textSize="18sp"
+            tools:text="REFERENCE LIBRARY"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/reference_label"
+            app:layout_constraintBottom_toBottomOf="@id/reference_label"
+            app:layout_constraintTop_toTopOf="@id/reference_label" />
+
+        <TextView
+            android:id="@+id/loanable_label"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reference_label"
+            android:text="@string/book_loanable"/>
+
+        <TextView
+            android:id="@+id/loanable_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            app:loabalbeBook="@{viewModel.book.loanable}"
+            android:textSize="18sp"
+            tools:text="IS LOANABLE"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/loanable_label"
+            app:layout_constraintBottom_toBottomOf="@id/loanable_label"
+            app:layout_constraintTop_toTopOf="@id/loanable_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

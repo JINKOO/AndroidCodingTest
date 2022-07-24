@@ -8,7 +8,9 @@ import com.kjk.quicksampleapp.R
 import com.kjk.quicksampleapp.databinding.ListItemBookBinding
 import com.kjk.quicksampleapp.domain.entity.BookEntity
 
-class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter(
+    private val callBack: OnItemClickListener
+) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     private var bookList = emptyList<BookEntity>()
 
@@ -17,7 +19,10 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        holder.bind(bookList[position])
+        holder.bind(
+            bookList[position],
+            callBack
+        )
     }
 
     override fun getItemCount(): Int {
@@ -34,9 +39,13 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
         private val binding: ListItemBookBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(bookEntity: BookEntity) {
+        fun bind(
+            bookEntity: BookEntity,
+            callBack: OnItemClickListener
+        ) {
             binding.apply {
                 book = bookEntity
+                bookCallBack = callBack
                 executePendingBindings()
             }
         }
@@ -54,4 +63,11 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
             }
         }
     }
+}
+
+class OnItemClickListener(
+    private val clickListener: (bookEntity: BookEntity) -> Unit
+)
+{
+    fun bookItemClickListener(bookEntity: BookEntity) = clickListener(bookEntity)
 }

@@ -5,14 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kjk.quicksampleapp.R
 import com.kjk.quicksampleapp.databinding.FragmentHomeBinding
+import com.kjk.quicksampleapp.domain.entity.BookEntity
 import com.kjk.quicksampleapp.presentation.adapter.BookAdapter
+import com.kjk.quicksampleapp.presentation.adapter.OnItemClickListener
 
 class HomeFragment : Fragment() {
 
@@ -23,7 +27,9 @@ class HomeFragment : Fragment() {
     }
 
     private val bookAdapter by lazy {
-        BookAdapter()
+        BookAdapter(OnItemClickListener {
+            viewModel.navigateToDetailFragment(it)
+        })
     }
 
     override fun onCreateView(
@@ -39,6 +45,8 @@ class HomeFragment : Fragment() {
             false
         )
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         return binding.root
     }
@@ -52,16 +60,20 @@ class HomeFragment : Fragment() {
 
     private fun observe() {
         viewModel.bookList.observe(viewLifecycleOwner, Observer {
-            Log.d(TAG, "observe: ")
-            val temp = viewModel.bookList.value!!.get(0)
-            Log.d(TAG, "observe: ${temp}")
+            Log.d(TAG, "observe: books ${it.size}")
         })
         
-        viewModel.videoList.observe(viewLifecycleOwner, Observer {
+        viewModel.videoList.observe(viewLifecycleOwner) {
             Log.d(TAG, "observe: videos ${it.size}")
-        })
-    }
+        }
 
+        viewModel.navigateToDetail.observe(viewLifecycleOwner) { bookEntity ->
+            bookEntity?.let {
+                moveToDetailFragment(bookEntity)
+                viewModel.navigateToDetailDone()
+            }
+        }
+    }
 
     private fun initLayout() {
         binding.bookRecyclerview.apply {
@@ -70,6 +82,10 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun moveToDetailFragment(bookEntity: BookEntity) {
+        this.findNavController()
+            .navigate(HomeFragmentDirections.actionHomeFragmentToBookDetailFragment(bookEntity))
+    }
 
     companion object {
         private const val TAG = "HomeFragment"
