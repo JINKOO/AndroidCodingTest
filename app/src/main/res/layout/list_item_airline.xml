@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="serviceAirline"
+            type="com.kjk.quicksampleapp.domain.entity.ServiceAirlineEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/airline_imageview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            app:airlineLogo="@{serviceAirline.airlineImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/airline_name_textview"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/ic_baseline_airplane_ticket_24"/>
+
+        <TextView
+            android:id="@+id/airline_name_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:gravity="center"
+            android:text="@{serviceAirline.airlineName}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/default_font_size"
+            app:layout_constraintStart_toEndOf="@id/airline_imageview"
+            app:layout_constraintTop_toTopOf="@id/airline_imageview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/airline_imageview"
+            tools:text="대한 항공"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
