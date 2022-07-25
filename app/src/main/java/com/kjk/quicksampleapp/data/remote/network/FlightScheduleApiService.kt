@@ -1,6 +1,5 @@
 package com.kjk.quicksampleapp.data.remote.network
 
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kjk.quicksampleapp.data.remote.response.ResponseFromNetwork
 import retrofit2.Retrofit
@@ -9,7 +8,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "http://apis.data.go.kr/B551177/PaxFltSched/"
-private const val SERVICE_KEY = "LuWoYg/LjEO2msXcm1LziDtVfMa3pdsvW6bffUuaXrP7YZMjRx9gKe6qzoAb53BlCNpeXe1N547rnwMQRi2ptQ=="
+private const val SERVICE_KEY =
+    ""
 
 private val gson = GsonBuilder()
     .setLenient()

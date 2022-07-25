@@ -37,7 +37,7 @@ data class ArrivalResponse(
     val lastOperateDate: String?,
     @SerializedName("airportcode") // 출발지 공항 코드 "NRT"
     val departAirportCode: String?,
-    @SerializedName("season")      // 시즌명
+    @SerializedName("season")      // 시즌명 ""
     val seasonCode: String?,
     @SerializedName("sunday")      // 일요일 취항 여부
     val operateOnSunday: String?,
